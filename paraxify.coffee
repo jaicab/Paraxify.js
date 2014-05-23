@@ -5,7 +5,7 @@
 
 "use strict"
 
-posY = 1
+posY = 0
 screenY = 0
 porcentaje = 0
 position = "center"
