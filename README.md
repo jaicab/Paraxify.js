@@ -1,4 +1,4 @@
-#Paraxify.js v0.1
+#Paraxify.js
 
 Simple parallax lightweight plugin (less than **2k gzipped**) built with Vanilla JS and CSS3 inspired by Spotify's. 
 
@@ -9,10 +9,13 @@ I built this plugin because I couldn't find any other non-jquery plugins that fi
 
 #TODO
 
-- Fix buggy behaviour on +IE9: The scrolling is not smooth.
+- Fix buggy behaviour on +IE9: The scrolling is not smooth. Check the following:
+	- Updating background position on real time.
+	- Not debouncing the scroll (too many calls).
 - Try debouncing scroll event so it doesn't launch a bizillion times per second.
-- Detect URL image changes and update `diff` accordingly.
+- Detect URL image changes (responsive design or any other) and update `diff` accordingly.
 - Clean up and make the code look pretty.
+- Make it work as a function with a default class of `paraxify` but also the option to set one.
 - Explain how it works on the README.
 - Build a small demo site.
 
