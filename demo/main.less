@@ -1,14 +1,20 @@
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
+.gradient (@startColor: #eee, @endColor: white) {
+  background-color: @startColor;
+  background: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+  background: -webkit-linear-gradient(top, @startColor, @endColor);
+  background: -moz-linear-gradient(top, @startColor, @endColor);
+  background: -ms-linear-gradient(top, @startColor, @endColor);
+  background: -o-linear-gradient(top, @startColor, @endColor);
+}
+
+*{
   box-sizing: border-box;
 }
-html,
-body,
-section {
+
+html, body, section{
   height: 100%;
 }
-body {
+body{
   font: 1em/1.25 "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: #222;
   color: #fff;
@@ -16,120 +22,123 @@ body {
   margin: 0;
   padding: 0;
 }
-header {
+
+header{
   padding: 1em;
   position: fixed;
   background: #222;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0,0,0,0.7);
   top: 0;
-  right: 0;
+  right: 0; 
   left: 0;
   z-index: 100;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+
+h1,h2,h3,h4,h5,h6{
   font-weight: 800;
   margin: 0;
 }
-h1 {
+
+h1{
   font-size: 4em;
 }
-h2 {
+h2{
   font-size: 2.5em;
 }
-p {
+p{
   font-size: 1.5em;
 }
-footer {
+footer{
   font-size: 0.6em;
   padding: 1em 0;
 }
-a {
+a{
   color: #7EA613;
 }
+
 /*Classes*/
-.bloque {
+
+.bloque{
   background: #f2f2f2;
 }
-.bloque.texto {
+
+.bloque.texto{
   padding: 4em 0;
+  
+  p,h1,h2,h3,h4,h5,h6{
+    max-width:70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: .5em;
+    text-align: left;
+    color: #111;
+  }
 }
-.bloque.texto p,
-.bloque.texto h1,
-.bloque.texto h2,
-.bloque.texto h3,
-.bloque.texto h4,
-.bloque.texto h5,
-.bloque.texto h6 {
-  max-width: 70%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: .5em;
-  text-align: left;
-  color: #111;
-}
+
 /* The "parallax" */
-.bloque.foto {
+.bloque.foto{
   background-color: red;
   background-position: center center;
   height: 500px;
   background-attachment: fixed;
-  -webkit-background-size: cover;
   background-size: cover;
   position: relative;
+  
+  *{
+    text-shadow: 0 0 5px #000;
+  }
 }
-.bloque.foto * {
-  text-shadow: 0 0 5px #000;
-}
-.over {
+
+.over{
   padding: 15em 0 0 0;
 }
-.button {
+
+.button{
   display: inline-block;
   margin-top: .5em;
   padding: .75em 2em;
   font-size: 1.3em;
   border-radius: .25em;
+  
   text-decoration: none;
   font-weight: bold;
   color: white;
   background: #7EA613;
-  background-color: #a1d418;
-  background: -webkit-gradient(linear, left top, left bottom, from(#a1d418), to(#7ea613));
-  background: -webkit-linear-gradient(top, #a1d418, #7ea613);
-  border: 0.1em solid #a5c15a;
+  .gradient(lighten(#7EA613, 10%), #7EA613);
+  border: 0.1em solid mix(#7EA613,white,70%);
 }
+
 /* The images */
-.foto.intro {
+.foto.intro{
   height: 100%;
   background-attachment: scroll;
   background-image: url(//d2c87l0yth4zbw.cloudfront.net/i/home/lifestyle-hero-lg.jpg);
 }
-.foto.foto-1 {
+
+.foto.foto-1{
   background-image: url(//d2c87l0yth4zbw.cloudfront.net/i/home/lifestyle-all-music-lg.jpg);
 }
-.foto.foto-2 {
+.foto.foto-2{
   background-image: url(//d2c87l0yth4zbw.cloudfront.net/i/home/lifestyle-listen-free-lg.jpg);
 }
-.foto.foto-3 {
+.foto.foto-3{
   background-image: url(//d2c87l0yth4zbw.cloudfront.net/i/home/lifestyle-discover-lg.jpg);
 }
-.foto.foto-4 {
+.foto.foto-4{
   background-image: url(//d2c87l0yth4zbw.cloudfront.net/i/home/lifestyle-browse-lg.jpg);
 }
-#offset {
+
+
+#offset{
   position: absolute;
   top: 0;
+  
   width: 20px;
   background-color: #069;
   border: 1px solid red;
   z-index: 300;
 }
-#scroll {
+#scroll{
   position: fixed;
   top: 0;
   right: 0;

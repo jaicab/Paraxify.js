@@ -165,7 +165,7 @@ window.onload = function() {
     console.log(fotos[i].image.height);    
   }
     
-  window.onscroll = debounce(animateParallax,10);
-  //setInterval(animateParallax, 1);
+  //window.onscroll = debounce(animateParallax,10);
+  window.onscroll = animateParallax;
 
 };
