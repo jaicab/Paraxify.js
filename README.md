@@ -1,4 +1,4 @@
-#Paraxify v0.1
+#Paraxify.js v0.1
 
 Simple parallax lightweight plugin (less than **2k gzipped**) built with Vanilla JS and CSS3 inspired by Spotify's. 
 
