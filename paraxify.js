@@ -6,7 +6,27 @@
 
 /*jslint vars: true, plusplus: true, devel: true, nomen: true, indent: 4, maxerr: 50 */
 
-var getWindowSize = (function() {
+var debounce = function(func, wait) {
+ var timeout;
+
+ // the debounced function
+ return function() {
+
+  var context = this, args = arguments;
+
+  // nulls out timer and calls original function
+  var later = function() {
+   timeout = null;
+   func.apply(context, args);
+  };
+
+  // restart the timer to call last function
+  clearTimeout(timeout);
+  timeout = setTimeout(later, wait);
+ };
+};
+
+var getWindowSize = (function () {
     var docEl = document.documentElement,
         IS_BODY_ACTING_ROOT = docEl && docEl.clientHeight === 0,
         b = document.body;
@@ -56,14 +76,15 @@ var posY = 0,
     screenY = getWindowSize().height,
     porcentaje = 0,
     position = "center",
-    fotos;
+    fotos,
+    contador = 0;
 
 
 
 
 function calcParallax(el){
    
-  porcentaje = (posY-el.offsetTop+screenY)*100/(el.offsetHeight+screenY);
+  porcentaje = (posY -el.offsetTop+screenY)*100/(el.offsetHeight+screenY);
   
   if(porcentaje<0){
     porcentaje = 0;
@@ -72,7 +93,7 @@ function calcParallax(el){
     porcentaje = 100;
   }
 
-  return (el.diferencia*(porcentaje-50)/100);
+  return Math.round((el.diferencia*(porcentaje-50)/100) * 100) / 100;
 }
 
 
@@ -91,11 +112,38 @@ var checkDimensions = (function(i) {
 
 
 
+var animateParallax = (function() {
+  posY = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+
+  for(var i=0; i<fotos.length; i++){
+
+    //Do de parallax ONLY AND ONLY IF the image is bigger than the container AND the container is visible
+    if(fotos[i].image.height>fotos[i].offsetHeight && ((posY+screenY) > fotos[i].offsetTop)){
+      position = calcParallax(fotos[i]);
+    }
+    else{
+      position = "center";
+    }
+
+    fotos[i].style.backgroundPosition = "center " + position + "px"; 
+    //fotos[i].style.backgroundAttachment = "scroll";
+    }
+
+    contador++;
+    console.log("Contador: "+contador);
+  
+});
+
+
+
 window.onresize = function(){
 
   screenY = getWindowSize().height;
 
 };
+
+
+
 
 
 
@@ -115,25 +163,9 @@ window.onload = function() {
     fotos[i].image.onload = setTimeout("checkDimensions("+i+")", 0); 
     fotos[i].image.src = fotos[i].url;
     console.log(fotos[i].image.height);    
-
   }
-
-  
-  window.onscroll = function() {
-    posY = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-
-    for(i=0; i<fotos.length; i++){
-
-      if(fotos[i].image.height>fotos[i].offsetHeight){
-        position = calcParallax(fotos[i]);
-      }
-      else{
-        position = "center";
-      }
-
-      fotos[i].style.backgroundPosition = "center " + position + "px"; 
-      //fotos[i].style.backgroundAttachment = "scroll";
-      }
-  };
+    
+  window.onscroll = debounce(animateParallax,10);
+  //setInterval(animateParallax, 1);
 
 };
