@@ -12,7 +12,7 @@ screenY = 0
 porcentaje = 0
 position = "center"
 fotos = 0
-speed = 3
+speed = 1
 
 
 
@@ -58,6 +58,7 @@ animateParallax = () ->
     else
       position = "center"
 
+    
     fotos[i].style.backgroundPosition = "center " + position + "px"
     
 
@@ -95,7 +96,8 @@ window.onload = () ->
     fotos[i].image.onload = setTimeout("checkDimensions("+i+")", 0)
     fotos[i].image.src = fotos[i].url
 
-    fotos[i].style.backgroundAttachment = "fixed"
+    #Make sure it's fixed
+    window.getComputedStyle(fotos[i],false).backgroundAttachment = "fixed" if window.getComputedStyle(fotos[i],false).backgroundAttachment != "fixed"
 
     i++
     

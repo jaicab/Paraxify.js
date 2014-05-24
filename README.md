@@ -16,6 +16,7 @@ I built this plugin because I couldn't find any other non-jquery plugins that fi
 - Detect URL image changes (responsive design or any other) and update `diff` accordingly.
 - Clean up and make the code look pretty.
 - Make it work as a function with a default class of `paraxify` but also the option to set one.
+- Do some research about speed and give the option to set it.
 - Explain how it works on the README.
 - Build a small demo site.
 

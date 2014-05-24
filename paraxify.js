@@ -20,7 +20,7 @@
 
   fotos = 0;
 
-  speed = 3;
+  speed = 1;
 
   window.calcParallax = function(el) {
     porcentaje = (posY - el.offsetTop + screenY) * 100 / (el.offsetHeight + screenY);
@@ -71,7 +71,9 @@
       fotos[i].image = new Image();
       fotos[i].image.onload = setTimeout("checkDimensions(" + i + ")", 0);
       fotos[i].image.src = fotos[i].url;
-      fotos[i].style.backgroundAttachment = "fixed";
+      if (window.getComputedStyle(fotos[i], false).backgroundAttachment !== "fixed") {
+        window.getComputedStyle(fotos[i], false).backgroundAttachment = "fixed";
+      }
       i++;
     }
     window.onscroll = animateParallax;
