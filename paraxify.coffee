@@ -1,7 +1,9 @@
 
-#!Paraxify 0.1
-# @author Jaime Caballero
-# MIT license
+###
+ Paraxify.js - v0.1
+ @author Jaime Caballero
+ MIT license
+###
 
 "use strict"
 
@@ -10,25 +12,27 @@ screenY = 0
 porcentaje = 0
 position = "center"
 fotos = 0
+speed = 3
 
 
 
 
 window.calcParallax = (el) ->
    
+
   porcentaje = (posY - el.offsetTop+screenY)*100 / (el.offsetHeight + screenY)
   
   porcentaje = 0 if porcentaje < 0
   porcentaje = 100 if porcentaje > 100
 
-  return Math.round((el.diferencia * (porcentaje - 50) / 100) * 100) / 100
+  return Math.round(((el.diferencia * speed)  * (porcentaje - 50) / 100) * 100) / 100
 
 
 
 
 window.checkDimensions = (i) ->
   
-  if(fotos[i].image.height<fotos[i].offsetHeight)
+  if fotos[i].image.height<fotos[i].offsetHeight
     console.log("The image "+ fotos[i].url +" (" + fotos[i].image.height + "px) is too short for that container ("+ fotos[i].offsetHeight +"px).")
 
   else
@@ -42,13 +46,13 @@ window.checkDimensions = (i) ->
 
 animateParallax = () ->
 
-  posY = if (window.pageYOffset != undefined) then window.pageYOffset else (document.documentElement || document.body.parentNode || document.body).scrollTop
+  posY = if window.pageYOffset != undefined then window.pageYOffset else (document.documentElement || document.body.parentNode || document.body).scrollTop
 
   i = 0
   while i < fotos.length
 
     #Do de parallax ONLY AND ONLY IF the image is bigger than the container AND the container is visible
-    if(fotos[i].image.height>fotos[i].offsetHeight && ((posY+screenY) > fotos[i].offsetTop))
+    if fotos[i].image.height>fotos[i].offsetHeight && ((posY+screenY) > fotos[i].offsetTop)
       position = calcParallax(fotos[i])
 
     else
