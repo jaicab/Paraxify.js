@@ -1,0 +1,197 @@
+@import 'normalize';
+@import 'paraxify';
+
+$color: #7EA613;
+$triangle: 2em;
+
+@mixin gradient($from, $to) {
+  background: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
+  background: -moz-linear-gradient(top,  $from, $to);
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}');
+}
+
+*{
+  box-sizing: border-box;
+}
+
+html, body, section{
+  height: 100%;
+}
+body{
+  font: 1em/1.25 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #222;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+header{
+  padding: 1em;
+  position: fixed;
+  background: #222;
+  background: rgba(0,0,0,0.7);
+  top: 0;
+  right: 0; 
+  left: 0;
+  z-index: 100;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-weight: 800;
+  margin: 0;
+}
+
+h1{
+  font-size: 4em;
+}
+h2{
+  font-size: 2.5em;
+}
+p{
+  font-size: 1.5em;
+}
+footer{
+  font-size: 0.6em;
+  padding: 1em 0;
+
+}
+a{
+  color: $color;
+}
+ul,ol{
+  padding: 0 0 0 2em;
+  margin: 0;
+  font-size: 1.5em;
+}
+ul{
+  list-style: square;
+}
+/*Classes*/
+
+.bloque{
+  background-color: #f2f2f2;
+}
+
+.bloque.texto{
+  padding: 4em 0;
+  text-align: left;
+  color: #111;
+  
+  .content{
+    max-width:70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: .5em;
+  }
+}
+
+.paraxify{
+  background-attachment: scroll;
+}
+
+/* The "parallax" */
+.bloque.foto{
+  background-color: red;
+  background-repeat: no-repeat;
+  height: 550px;
+  position: relative;
+  
+  *{
+    text-shadow: 0 1px 2px #000;
+  }
+}
+
+.over{
+  padding: 10em 1em 0 1em;
+
+  h1{
+    line-height: 0.8;
+  }
+
+  &:after{
+    content: '\2228';
+    display: inline-block;
+    border-radius: 50%;
+    margin: $triangle/2 0;
+    width: $triangle;
+    height: $triangle;
+    line-height: $triangle;
+    font-size: 2em;
+    text-shadow: none !important;
+    background: $color;
+    background: rgba(#fff, 0.3);
+  }
+}
+.toTop{
+  content: '\2228';
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 50%;
+  margin: 1em 0;
+  width: 2em;
+  height: 2em;
+  line-height: 2.3;
+  font-size: 3em;
+  text-shadow: none !important;
+  background: $color;
+  background: rgba(#fff, 0.3);
+}
+
+.share{
+  padding: 3em 0 0 0;
+}
+
+.button{
+  display: inline-block;
+  margin-top: .5em;
+  padding: .75em 2em;
+  font-size: 1.3em;
+  border-radius: .35em;
+  
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  background: $color;
+  border: 0.1em solid mix($color,white,70%);
+  box-shadow: 0 0 0 transparent;
+
+  transition: .5s ease-out;
+
+  @include gradient(lighten($color, 10%), $color);
+}
+
+.button:hover{
+
+  transition: .3s cubic-bezier(.29,1.24,.96,1.25);
+
+  box-shadow: 0 .5em 1em -.25em #000;
+  transform: scale(1.2);
+}
+
+/* The images */
+.foto.intro{
+  height: 100%;
+  background-attachment: scroll;
+  background-position: center center;
+  background-image: url("img/intro.jpg");
+}
+
+.foto.foto-1{
+  background-image: url("img/1.jpg");
+}
+.foto.foto-2{
+  background-image: url("img/2.jpg");
+}
+.foto.foto-3{
+  background-image: url("img/3.jpg");
+}
+.foto.foto-4{
+  background-image: url("img/4.jpg");
+}
+
+@media screen and (min-width: 40em){
+  .paraxify{
+    background-attachment: fixed;
+  }
+}
