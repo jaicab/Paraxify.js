@@ -76,6 +76,13 @@ animateParallax = () ->
 window.onresize = () ->
 
   screenY =  window.innerHeight
+  
+  i = 0
+  while i < fotos.length
+
+    checkDimensions(i)
+
+    i++
 
   return
 
@@ -99,9 +106,6 @@ window.onload = () ->
     fotos[i].image = new Image()
     fotos[i].image.onload = setTimeout("checkDimensions("+i+")", 0)
     fotos[i].image.src = fotos[i].url
-
-    #Make sure it's fixed
-    window.getComputedStyle(fotos[i],false).backgroundAttachment = "fixed" if window.getComputedStyle(fotos[i],false).backgroundAttachment != "fixed"
 
     i++
     
