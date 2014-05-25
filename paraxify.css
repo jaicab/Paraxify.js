@@ -1,4 +1,5 @@
 .paraxify {
-  background-attachment: fixed !important;
+  background-attachment: fixed;
   background-position: center center;
+  background-size: cover;
 }

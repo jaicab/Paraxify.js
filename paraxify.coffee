@@ -12,7 +12,7 @@ screenY = 0
 porcentaje = 0
 position = "center"
 fotos = 0
-speed = 1
+speed = 2.5
 
 
 

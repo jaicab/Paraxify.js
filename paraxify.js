@@ -20,7 +20,7 @@
 
   fotos = 0;
 
-  speed = 1;
+  speed = 2.5;
 
   window.calcParallax = function(el) {
     porcentaje = (posY - el.offsetTop + screenY) * 100 / (el.offsetHeight + screenY);
