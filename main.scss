@@ -37,7 +37,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 h1{
-  font-size: 4em;
+  font-size: 3em;
 }
 footer{
   font-size: 0.6em;
@@ -132,7 +132,7 @@ ul{
 .button{
   display: inline-block;
   margin-top: .5em;
-  padding: .75em 2em;
+  padding: .75em 1.5em;
   font-size: 1.3em;
   border-radius: .35em;
   
@@ -192,6 +192,9 @@ ul{
     z-index: 100;
   }
 
+  h1{
+    font-size: 4em;
+  }
   h2{
     font-size: 2.5em;
   }
