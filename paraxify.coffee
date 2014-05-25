@@ -32,7 +32,7 @@ window.calcParallax = (el) ->
 
 window.checkDimensions = (i) ->
   
-  if fotos[i].image.height<fotos[i].offsetHeight
+  if fotos[i].image.height < fotos[i].offsetHeight
     console.log("The image "+ fotos[i].url +" (" + fotos[i].image.height + "px) is too short for that container ("+ fotos[i].offsetHeight +"px).")
 
   else
@@ -52,7 +52,11 @@ animateParallax = () ->
   while i < fotos.length
 
     #Do de parallax ONLY AND ONLY IF the image is bigger than the container AND the container is visible
-    if fotos[i].image.height>fotos[i].offsetHeight && ((posY+screenY) > fotos[i].offsetTop)
+    if (
+      fotos[i].image.height > fotos[i].offsetHeight and
+      ((posY + screenY) > fotos[i].offsetTop) and
+      window.getComputedStyle(fotos[i],false).backgroundAttachment == "fixed"
+      )
       position = calcParallax(fotos[i])
 
     else
