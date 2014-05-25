@@ -28,13 +28,7 @@ body{
 
 header{
   padding: 1em;
-  position: fixed;
   background: #222;
-  background: rgba(0,0,0,0.7);
-  top: 0;
-  right: 0; 
-  left: 0;
-  z-index: 100;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -44,12 +38,6 @@ h1,h2,h3,h4,h5,h6{
 
 h1{
   font-size: 4em;
-}
-h2{
-  font-size: 2.5em;
-}
-p{
-  font-size: 1.5em;
 }
 footer{
   font-size: 0.6em;
@@ -62,7 +50,6 @@ a{
 ul,ol{
   padding: 0 0 0 2em;
   margin: 0;
-  font-size: 1.5em;
 }
 ul{
   list-style: square;
@@ -74,12 +61,12 @@ ul{
 }
 
 .bloque.texto{
-  padding: 4em 0;
+  padding: 2em;
   text-align: left;
   color: #111;
   
   .content{
-    max-width:70%;
+    max-width:960px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: .5em;
@@ -94,7 +81,7 @@ ul{
 .bloque.foto{
   background-color: red;
   background-repeat: no-repeat;
-  height: 550px;
+  height: 250px;
   position: relative;
   
   *{
@@ -103,7 +90,7 @@ ul{
 }
 
 .over{
-  padding: 9em 1em 0 1em;
+  padding: 2em 1em 0 1em;
 
   h1{
     line-height: 0.8;
@@ -171,7 +158,7 @@ ul{
 
 /* The images */
 .foto.intro{
-  height: 100%;
+  height: auto;
   background-attachment: scroll;
   background-position: center center;
   background-image: url("img/intro.jpg");
@@ -193,5 +180,40 @@ ul{
 @media screen and (min-width: 40em){
   .paraxify{
     background-attachment: fixed;
+  }
+
+
+  header{    
+    position: fixed;
+    background: rgba(0,0,0,0.7);
+    top: 0;
+    right: 0; 
+    left: 0;
+    z-index: 100;
+  }
+
+  h2{
+    font-size: 2.5em;
+  }
+  p, ul, ol{
+    font-size: 1.5em;
+  }
+
+  .over{
+    padding-top: 9em;
+  }
+
+  .bloque.texto{
+    padding: 4em 0; 
+    .content{
+      max-width: 70%;
+    }   
+  }
+
+  .bloque.foto{
+    height: 550px;
+  }
+  .foto.intro{
+    height: 100%;
   }
 }
