@@ -1,0 +1,124 @@
+.paraxify {
+  background-attachment: fixed !important;
+  background-position: center center; }
+
+* {
+  box-sizing: border-box; }
+
+html, body, section {
+  height: 100%; }
+
+body {
+  font: 1em/1.25 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: #222;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 0; }
+
+header {
+  padding: 1em;
+  position: fixed;
+  background: #222;
+  background: rgba(0, 0, 0, 0.7);
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
+  margin: 0; }
+
+h1 {
+  font-size: 4em; }
+
+h2 {
+  font-size: 2.5em; }
+
+p {
+  font-size: 1.5em; }
+
+footer {
+  font-size: 0.6em;
+  padding: 1em 0; }
+
+a {
+  color: #7EA613; }
+
+/*Classes*/
+.bloque {
+  background-color: #f2f2f2; }
+
+.bloque.texto {
+  padding: 4em 0; }
+  .bloque.texto p, .bloque.texto h1, .bloque.texto h2, .bloque.texto h3, .bloque.texto h4, .bloque.texto h5, .bloque.texto h6 {
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: .5em;
+    text-align: left;
+    color: #111; }
+
+/* The "parallax" */
+.bloque.foto {
+  background-color: red;
+  background-repeat: no-repeat;
+  height: 550px;
+  background-size: cover;
+  position: relative; }
+  .bloque.foto * {
+    text-shadow: 0 0 5px #000; }
+
+.over {
+  padding: 15em 0 0 0; }
+
+.button {
+  display: inline-block;
+  margin-top: .5em;
+  padding: .75em 2em;
+  font-size: 1.3em;
+  border-radius: .25em;
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  background: #7EA613;
+  border: 0.1em solid #a4c059;
+  background: -webkit-gradient(linear, left top, left bottom, from(#a1d418), to(#7ea613));
+  background: -moz-linear-gradient(top, #a1d418, #7ea613);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a1d418', endColorstr='#7ea613'); }
+
+/* The images */
+.foto.intro {
+  height: 100%;
+  background-attachment: scroll;
+  background-image: url("//d2c87l0yth4zbw.cloudfront.net/i/home/lifestyle-hero-lg.jpg"); }
+
+.foto.foto-1 {
+  background-image: url("//d2c87l0yth4zbw.cloudfront.net/i/home/lifestyle-all-music-lg.jpg"); }
+
+.foto.foto-2 {
+  background-image: url("//d2c87l0yth4zbw.cloudfront.net/i/home/lifestyle-listen-free-lg.jpg"); }
+
+.foto.foto-3 {
+  background-image: url("//d2c87l0yth4zbw.cloudfront.net/i/home/lifestyle-discover-lg.jpg"); }
+
+.foto.foto-4 {
+  background-image: url("//d2c87l0yth4zbw.cloudfront.net/i/home/lifestyle-browse-lg.jpg"); }
+
+#offset {
+  position: absolute;
+  top: 0;
+  width: 20px;
+  background-color: #069;
+  border: 1px solid red;
+  z-index: 300; }
+
+#scroll {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 20px;
+  background-color: #fff;
+  border: 1px solid red;
+  z-index: 300; }

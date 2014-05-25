@@ -1,3 +1,4 @@
 
 *.codekit
 *.sass-cache
+*.scss
