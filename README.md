@@ -23,9 +23,9 @@ This way you can control when it's active or not just switching the `background-
 	- Not debouncing the scroll (too many calls).
 - Try debouncing scroll event so it doesn't launch a bizillion times per second.
 - Detect URL image changes (responsive design or any other) and update `diff` accordingly.
-- Clean up and make the code look pretty.
 - Make it work as a function with a default class of `paraxify` but also the option to set one.
 - Do some research about speed and give the option to set it.
+- Set up a isMobile() function or a modernizr shorthand: Fixed backgrounds are really buggy on mobile.
 
 
 ##Contributing
