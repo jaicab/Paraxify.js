@@ -178,10 +178,6 @@ ul{
 }
 
 @media screen and (min-width: 40em){
-  .paraxify{
-    background-attachment: fixed;
-  }
-
 
   header{    
     position: fixed;
@@ -218,5 +214,11 @@ ul{
   }
   .foto.intro{
     height: 100%;
+  }
+}
+
+@media screen and (min-width: 60em){
+  .paraxify{
+    background-attachment: fixed;
   }
 }
