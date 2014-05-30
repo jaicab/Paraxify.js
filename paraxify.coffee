@@ -49,15 +49,18 @@
       for i of options
         @options[i] = options[i]
 
-      this.options.speed = 1 if this.options.speed < 0 || this.options.speed > 2.5
+      this.options.speed = 1 if this.options.speed < 0 || this.options.speed > 1
+
+      # By default, paraxify class
+      el = 'paraxify' if !el
 
       # Classes
       if document.getElementsByClassName(el.replace('.',''))
         this.photos = document.getElementsByClassName(el.replace('.',''))
 
       # Now query selector
-      #else if document.querySelector(el)!=false
-       # this.photos = querySelector(el)
+      else if document.querySelector(el)!=false
+        this.photos = querySelector(el)
 
       # The element doesn't exist
       else
@@ -94,11 +97,12 @@
 
           i++
           
-        
-        #addEvent(window, "scroll", this, false)
-        #addEvent(window, "resize", this, false)
         window.onscroll = (->
           this._animate()
+          return
+        ).bind(this)
+        window.resize = (->
+          this.update()
           return
         ).bind(this)
 

@@ -123,27 +123,27 @@
 		"shouldRunBless": 1,
 		"useLibsass": 0
 		},
-	"\/old_paraxify.min.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/old_paraxify.min.js",
-		"outputAbbreviatedPath": "\/min\/old_paraxify.min-ck.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
 	"\/paraxify.coffee": {
 		"createSourceMap": 0,
 		"fileType": 32,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/paraxify.coffee",
-		"minifyOutput": 0,
+		"minifyOutput": 1,
 		"outputAbbreviatedPath": "\/paraxify.min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 1,
+		"outputStyle": 0,
+		"syntaxCheckerStyle": 1
+		},
+	"\/paraxify.min.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/paraxify.min.js",
+		"outputAbbreviatedPath": "\/min\/paraxify.min-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		}

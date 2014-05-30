@@ -32,27 +32,40 @@
    </div>
   
    <div class="bloque texto">
-    <div class="content">
-     <h2>Nice, isn't it?</h2>
-     <p>Let me tell you how this works. I think you'll like it.</p>
-     <ol>
-      <li>Start with a centered background image bigger than the element it's been set on.</li>
-      <li>Add the <code>paraxify</code> class to the elements that you want to <i>paraxify</i>.</li>
-      <li>As long as the background is <code>fixed</code>, the images will <b>scroll all the hidden part</b> accordingly to the scroll position.</li>
-     </ol>
-     <p>This way you can control when it's active or not just switching the <code>background-attachment</code> property on CSS to <code>scroll</code>. And the speed is determined by the difference between the element's height and the image's.</p>
-    </div>
+      <div class="content">
+        <h2>How do I make it work?</h2>
+        <p>You'll need the <code>paraxify.js</code> file and also the <code>_paraxify.scss</code> file or the CSS equivalent.</p>
+        <ol>
+          <li>Start with a centered background image <b>bigger</b> than the element it's been set on.</li>
+          <li>Add the <code>paraxify</code> class to the elements that you want to <i>paraxify</i>.</li>
+<pre>
+.paraxify{
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+}
+</pre>
+          <li>Now just start the JavaScript part:</li>
+<pre>
+myParaxify = paraxify();
+</pre>
+          <li>Ready to go! You should see the background images parallaxing.</li>
+        </ol>
+      </div>
    </div> 
     
     <div class="bloque paraxify foto foto-2">
    </div>
     
-    <div class="bloque texto">
-      <div class="content">
-        <h2>Try disabling JavaScript.</h2>
-        <p>I wanted the background to be <code>fixed</code> so it creates a nice pure CSS parallax effect in case the JavaScript is not supported or disabled in the browser. Go on, try disabling JavaScript!</p>
-        <p>I had performance in mind when I built this plugin, so <b>only the visibe photos are scrolled</b>.</p>
-      </div>
+   <div class="bloque texto">
+    <div class="content">
+      <h2>Nice, isn't it?</h2>
+      <p>Let me tell you how this works. I think you'll like it.</p>
+      <p>As long as the background is <code>fixed</code>, the images will <b>scroll all the hidden part</b> accordingly to the scroll position. This way you can control when it's active or not just switching the <code>background-attachment</code> property on CSS to <code>scroll</code>.</p>
+      <p>The speed is determined by the difference between the element's height and the image's.</p>
+      <p>I wanted the background to be <code>fixed</code> so it creates a nice pure CSS parallax effect in case the JavaScript is not supported or disabled in the browser. Go on, try disabling JavaScript!</p>
+      <p>I had performance in mind when I built this plugin, so <b>only the visibe photos are scrolled</b>.</p>
+    </div>
    </div> 
     
     <div class="bloque paraxify foto foto-3">
@@ -82,7 +95,7 @@
   
   <script type="text/javascript" src="paraxify.min.js"></script>
   <script>
-  var parallax = paraxify(".paraxify",{speed:3});
+  parallax = paraxify()
   </script>
 </body>
 </html>
