@@ -31,34 +31,33 @@
 
         return this
 
+
     posY = 0
     screenY = 0
     i = 0
     opt = {}
     pho = []
+    contador = 0
 
     Paraxify = (el, options) ->
 
       this.options = {
-        invert: false
-        speed: 2.5
+        speed: 1
       }
 
-      posY = 0
-      screenY = 0
-      i = 0
-
       # User defined options
-      for i in options
-        this.options[i] = options[i]
+      for i of options
+        @options[i] = options[i]
+
+      this.options.speed = 1 if this.options.speed < 0 || this.options.speed > 1
 
       # Classes
       if document.getElementsByClassName(el.replace('.',''))
         this.photos = document.getElementsByClassName(el.replace('.',''))
 
       # Now query selector
-      #else if document.querySelector(el)!=false
-       # this.photos = querySelector(el)
+      else if document.querySelector(el)!=false
+        this.photos = querySelector(el)
 
       # The element doesn't exist
       else
@@ -81,7 +80,6 @@
       _init: ->
         #Get values on load
         screenY = window.innerHeight
-            
         i = 0
         while i < pho.length
 
@@ -90,14 +88,19 @@
                              .replace(/url\((['"])?(.*?)\1\)/gi, '$2')
                               .split(',')[0]
 
-          pho[i].image = document.createElement('img')
-          pho[i].image.onload = this._check(i)
-          pho[i].image.src = pho[i].url
+          pho[i].img = new Image()
+          this._check(i)
+          pho[i].img.src = pho[i].url
 
           i++
           
-        window.onscroll = this._animate()
-        window.resize = this._update()
+        
+        #addEvent(window, "scroll", this, false)
+        #addEvent(window, "resize", this, false)
+        window.onscroll = (->
+          this._animate()
+          return
+        ).bind(this)
 
         return
 
@@ -117,26 +120,30 @@
 
       _check: (i) ->
 
-        if pho[i].image.height < pho[i].offsetHeight
-          throw new Error("The image "+ pho[i].url +" (" + pho[i].image.height + "px) is too short for that container ("+ pho[i].offsetHeight +"px).")
+        main = pho[i]
 
-        else
-          pho[i].diff = -(pho[i].image.height - pho[i].offsetHeight)
-          pho[i].diff = -(pho[i].diff) if opt.invert
+        pho[i].img.onload = ->
+          if this.height < main.offsetHeight
+            throw new Error("The image "+ main.url +" (" + this.height + "px) is too short for that container ("+ main.offsetHeight +"px).")
+          else
+            main.diff = -(this.height - main.offsetHeight)
+          return
+
 
         return
 
-
       _animate: ->
-
-        posY = if window.pageYOffset != undefined then window.pageYOffset else (document.documentElement || document.body.parentNode || document.body).scrollTop
+        if window.pageYOffset != undefined
+          posY = window.pageYOffset
+        else
+          posY = (document.documentElement || document.body.parentNode || document.body).scrollTop
 
         i = 0
         while i < pho.length
           #Do de parallax ONLY AND ONLY IF the image is bigger than the container AND the container is visible
-          if (pho[i].image.height > pho[i].offsetHeight and ((posY + screenY) > pho[i].offsetTop) and window.getComputedStyle(pho[i],false).backgroundAttachment == "fixed")
+          if (pho[i].img.height > pho[i].offsetHeight and ((posY + screenY) > pho[i].offsetTop) and window.getComputedStyle(pho[i],false).backgroundAttachment == "fixed")
 
-            per = (posY - pho[i].offsetTop+screenY ) * 100 / (pho[i].offsetHeight + screenY)
+            per = (posY - pho[i].offsetTop + screenY ) * 100 / (pho[i].offsetHeight + screenY)
 
             per = 0 if per < 0
             per = 100 if per > 100
@@ -146,11 +153,11 @@
           else
             position = "center"
 
-        
           pho[i].style.backgroundPosition = "center " + position + "px"
         
+          i++
 
-        i++
+
 
         return
 
@@ -159,6 +166,7 @@
     return new Paraxify(el, options)
 
   window.paraxify = paraxify
+  window.onload = paraxify('.paraxify') if !el
 
   return
 

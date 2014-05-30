@@ -15,17 +15,24 @@ I built this plugin because I couldn't find any other non-jquery plugins that fi
 
 This way you can control when it's active or not just switching the `background-attachment` property on CSS to scroll. And the speed is determined by the difference between the element's height and the image's.
 
+##Advanced use
+You can set another selector class or any other actually. The `paraxify` function has two parameters:
+	
+	var parallax = paraxify('selector', {
+		speed: 1
+	});
+
+On `selector` you can set any selector, but a class is more retro compatible. Also, you can set a speed from 0 to 1. The lower the speed, the less distance the background is gonna move. This speed is always proportional to the difference between the image's height and the element's.
+
+For now speed is the only thing you can configure, but there'll be more stuff on the future.
+
 
 ##TODO
 
-- Fix buggy behaviour on +IE9: The scrolling is not smooth. Check the following:
-	- Updating background position on real time.
-	- Not debouncing the scroll (too many calls).
-- Try debouncing scroll event so it doesn't launch a bizillion times per second.
-- Detect URL image changes (responsive design or any other) and update `diff` accordingly.
-- Make it work as a function with a default class of `paraxify` but also the option to set one.
-- Do some research about speed and give the option to set it.
-- Set up a isMobile() function or a modernizr shorthand: Fixed backgrounds are really buggy on mobile.
+- [I'M ON IT] Set up a isMobile() function or a modernizr shorthand: Fixed backgrounds are really buggy on mobile.
+- [I'M ON IT] Detect URL image changes (responsive design or any other) and update `diff` accordingly.
+- [HOLD] Fix buggy behaviour on +IE9: The scrolling is not smooth.
+- [HOLD] Try debouncing scroll event so it doesn't launch a bizillion times per second.
 
 
 ##Contributing
