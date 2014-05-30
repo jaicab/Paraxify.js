@@ -11,22 +11,24 @@ I built this plugin because I couldn't find any other non-jquery plugins that fi
 
 1. Start with a centered background image bigger than the element it's been set on.
 2. Add the paraxify class to the elements that you want to paraxify.
+```css
 	.paraxify{
 	  background-attachment: fixed;
 	  background-position: center center;
 	  background-size: cover;
 	}
+
 3. Now just start the JavaScript part:
+```javascript
 	myParaxify = paraxify();
+
 4. Ready to go! You should see the background images parallaxing.
 
-As long as the background is fixed, the images will scroll all the hidden part accordingly to the scroll position. This way you can control when it's active or not just switching the background-attachment property on CSS to scroll.
+As long as the background is `fixed`, the images will scroll all the hidden part accordingly to the scroll position. This way you can control when it's active or not just switching the `background-attachment` property on CSS to scroll.
 
-The speed is determined by the difference between the element's height and the image's.
+**The speed** is determined by the difference between the element's height and the image's.
 
-I wanted the background to be fixed so it creates a nice pure CSS parallax effect in case the JavaScript is not supported or disabled in the browser. Go on, try disabling JavaScript!
-
-I had performance in mind when I built this plugin, so only the visibe photos are scrolled.
+I wanted the background to be fixed so it creates a nice pure CSS parallax effect in case the JavaScript is not supported or disabled in the browser. I had performance in mind when I built this plugin, so **only the visibe photos are scrolled**.
 
 ##Advanced use
 You can set another selector class or any other actually. The `paraxify` function has two parameters:
@@ -35,7 +37,7 @@ You can set another selector class or any other actually. The `paraxify` functio
 		speed: 1
 	});
 
-On `selector` you can set any selector, but a class is more retro compatible. Also, you can set a speed from 0 to 1. The lower the speed, the less distance the background is gonna move. This speed is always proportional to the difference between the image's height and the element's.
+On `selector` you can set any selector, but a class is more retro-compatible. Also, you can set a speed from 0 to 1. The lower the speed, the less distance the background is gonna move. This speed is always proportional to the difference between the image's height and the element's.
 
 For now speed is the only thing you can configure, but there'll be more stuff on the future.
 
