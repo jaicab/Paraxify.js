@@ -9,22 +9,22 @@ I built this plugin because I couldn't find any other non-jquery plugins that fi
 
 ##How does it work?
 
-- Start with a centered background image bigger than the element it's been set on.
+1. Start with a centered background image bigger than the element it's been set on.
 - Add the paraxify class to the elements that you want to paraxify.
 
 ```css
-	.paraxify{
-	  background-attachment: fixed;
-	  background-position: center center;
-	  background-size: cover;
-	}
+.paraxify{
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+}
 ```
 
 - Now just start the JavaScript part:
 
 ```javascript
-	myParaxify = paraxify();
-``
+myParaxify = paraxify();
+```
 
 - Ready to go! You should see the background images parallaxing.
 
