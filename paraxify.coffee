@@ -51,6 +51,9 @@
 
       this.options.speed = 1 if this.options.speed < 0 || this.options.speed > 1
 
+      # By default, paraxify class
+      el = 'paraxify' if !el
+
       # Classes
       if document.getElementsByClassName(el.replace('.',''))
         this.photos = document.getElementsByClassName(el.replace('.',''))
@@ -94,11 +97,12 @@
 
           i++
           
-        
-        #addEvent(window, "scroll", this, false)
-        #addEvent(window, "resize", this, false)
         window.onscroll = (->
           this._animate()
+          return
+        ).bind(this)
+        window.resize = (->
+          this.update()
           return
         ).bind(this)
 
@@ -166,7 +170,6 @@
     return new Paraxify(el, options)
 
   window.paraxify = paraxify
-  window.onload = paraxify('.paraxify') if !el
 
   return
 

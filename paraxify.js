@@ -48,6 +48,9 @@
         if (this.options.speed < 0 || this.options.speed > 1) {
           this.options.speed = 1;
         }
+        if (!el) {
+          el = 'paraxify';
+        }
         if (document.getElementsByClassName(el.replace('.', ''))) {
           this.photos = document.getElementsByClassName(el.replace('.', ''));
         } else if (document.querySelector(el) !== false) {
@@ -72,6 +75,9 @@
           }
           window.onscroll = (function() {
             this._animate();
+          }).bind(this);
+          window.resize = (function() {
+            this.update();
           }).bind(this);
         },
         _update: function() {
@@ -122,9 +128,6 @@
       return new Paraxify(el, options);
     };
     window.paraxify = paraxify;
-    if (!el) {
-      window.onload = paraxify('.paraxify');
-    }
   })(document, window, 0);
 
 }).call(this);

@@ -1,0 +1,69 @@
+<h1>Paraxify.js</h1>
+
+<p>Simple parallax lightweight plugin (less than <strong>1.5kb gzipped</strong>) built with Vanilla JS and CSS3 inspired by Spotify&rsquo;s website parallax effect.</p>
+
+<p>It&rsquo;s been thought as a progressive enhancing plugin, so don&rsquo;t expect it to work exactly the same on all browsers, but it does work in all of them, in one way or another.</p>
+
+<p>I built this plugin because I couldn&rsquo;t find any other non-jquery plugins that fit my needs.</p>
+
+<h2>How does it work?</h2>
+
+<ol>
+<li>Start with a centered background image bigger than the element it&rsquo;s been set on.</li>
+<li>Add the paraxify class to the elements that you want to paraxify.
+ .paraxify{
+   background-attachment: fixed;
+   background-position: center center;
+   background-size: cover;
+ }</li>
+<li>Now just start the JavaScript part:
+ myParaxify = paraxify();</li>
+<li>Ready to go! You should see the background images parallaxing.</li>
+</ol>
+
+
+<p>As long as the background is fixed, the images will scroll all the hidden part accordingly to the scroll position. This way you can control when it&rsquo;s active or not just switching the background-attachment property on CSS to scroll.</p>
+
+<p>The speed is determined by the difference between the element&rsquo;s height and the image&rsquo;s.</p>
+
+<p>I wanted the background to be fixed so it creates a nice pure CSS parallax effect in case the JavaScript is not supported or disabled in the browser. Go on, try disabling JavaScript!</p>
+
+<p>I had performance in mind when I built this plugin, so only the visibe photos are scrolled.</p>
+
+<h2>Advanced use</h2>
+
+<p>You can set another selector class or any other actually. The <code>paraxify</code> function has two parameters:</p>
+
+<pre><code>var myParaxify = paraxify('selector', {
+    speed: 1
+});
+</code></pre>
+
+<p>On <code>selector</code> you can set any selector, but a class is more retro compatible. Also, you can set a speed from 0 to 1. The lower the speed, the less distance the background is gonna move. This speed is always proportional to the difference between the image&rsquo;s height and the element&rsquo;s.</p>
+
+<p>For now speed is the only thing you can configure, but there&rsquo;ll be more stuff on the future.</p>
+
+<p>At last but not least, you can access all the background info that paraxify calculates on real time. Type this in your console and you&rsquo;ll see:</p>
+
+<pre><code>myParaxify.photos
+</code></pre>
+
+<h2>TODO</h2>
+
+<ul>
+<li>[I&rsquo;M ON IT] Set up a isMobile() function or a modernizr shorthand: Fixed backgrounds are really buggy on mobile.</li>
+<li>[I&rsquo;M ON IT] Detect URL image changes (responsive design or any other) and update <code>diff</code> accordingly.</li>
+<li>[HOLD] Fix buggy behaviour on +IE9: The scrolling is not smooth.</li>
+<li>[HOLD] Try debouncing scroll event so it doesn&rsquo;t launch a bizillion times per second.</li>
+</ul>
+
+
+<h2>Contributing</h2>
+
+<p>Please, feel free to fork the project and modify it as you wish. Just try to keep it <strong>light and working</strong>. Send me a pull request and I&rsquo;ll review it as soon as possible. Any new feature is welcome aboard.</p>
+
+<p>If you feel like discussing a new feature or you&rsquo;ve found a bug, open an issue or contact me on twitter (<a href="http://twitter.com/jaicab_">@jaicab_</a>) so we can talk about it.</p>
+
+<h2>MIT License</h2>
+
+<p>Paraxify has been coded from scratch by <a href="http://jaicab.com">Jaime Caballero</a> and it&rsquo;s licensed under <strong>MIT License</strong>.</p>
