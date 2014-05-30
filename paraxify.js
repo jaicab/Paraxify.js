@@ -5,81 +5,113 @@
  @author Jaime Caballero
  MIT license
  */
-
-(function() {
+(function(document, window, index) {
   "use strict";
-  var animateParallax, fotos, porcentaje, posY, position, screenY, speed;
-
-  posY = 0;
-
-  screenY = 0;
-
-  porcentaje = 0;
-
-  position = "center";
-
-  fotos = 0;
-
-  speed = 2.5;
-
-  window.calcParallax = function(el) {
-    porcentaje = (posY - el.offsetTop + screenY) * 100 / (el.offsetHeight + screenY);
-    if (porcentaje < 0) {
-      porcentaje = 0;
+  var paraxify;
+  paraxify = function(el, options) {
+    var Paraxify, computed, i, opt, pho, posY, screenY;
+    computed = !!window.getComputedStyle;
+    if (!computed) {
+      window.getComputedStyle = function(el) {
+        this.el = el;
+        this.getPropertyValue = function(prop) {
+          var re;
+          re = /(\-([a-z]){1})/g;
+          if (prop === "float") {
+            prop = "styleFloat";
+          }
+          if (re.test(prop)) {
+            prop = prop.replace(re, function() {
+              return arguments[2].toUpperCase();
+            });
+          }
+          return el.currentStyle[prop];
+        };
+        return this;
+      };
     }
-    if (porcentaje > 100) {
-      porcentaje = 100;
-    }
-    return Math.round(((el.diferencia * speed) * (porcentaje - 50) / 100) * 100) / 100;
-  };
-
-  window.checkDimensions = function(i) {
-    if (fotos[i].image.height < fotos[i].offsetHeight) {
-      console.log("The image " + fotos[i].url(+" (" + fotos[i].image.height + "px) is too short for that container (" + fotos[i].offsetHeight(+"px).")));
-    } else {
-      console.log("It's ok");
-      fotos[i].diferencia = -(fotos[i].image.height - fotos[i].offsetHeight);
-    }
-  };
-
-  animateParallax = function() {
-    var i;
-    posY = window.pageYOffset !== void 0 ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+    posY = 0;
+    screenY = 0;
     i = 0;
-    while (i < fotos.length) {
-      if (fotos[i].image.height > fotos[i].offsetHeight && ((posY + screenY) > fotos[i].offsetTop) && window.getComputedStyle(fotos[i], false).backgroundAttachment === "fixed") {
-        position = calcParallax(fotos[i]);
-      } else {
-        position = "center";
+    opt = {};
+    pho = [];
+    Paraxify = function(el, options) {
+      var _i, _len;
+      this.options = {
+        invert: false,
+        speed: 2.5
+      };
+      posY = 0;
+      screenY = 0;
+      i = 0;
+      for (_i = 0, _len = options.length; _i < _len; _i++) {
+        i = options[_i];
+        this.options[i] = options[i];
       }
-      fotos[i].style.backgroundPosition = "center " + position + "px";
-      i++;
-    }
+      if (document.getElementsByClassName(el.replace('.', ''))) {
+        this.photos = document.getElementsByClassName(el.replace('.', ''));
+      } else {
+        throw new Error("The elements you're trying to select don't exist.");
+      }
+      opt = this.options;
+      pho = this.photos;
+      this._init(this);
+    };
+    Paraxify.prototype = {
+      _init: function() {
+        screenY = window.innerHeight;
+        i = 0;
+        while (i < pho.length) {
+          pho[i].url = window.getComputedStyle(pho[i], false).backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2').split(',')[0];
+          pho[i].image = document.createElement('img');
+          pho[i].image.onload = this._check(i);
+          pho[i].image.src = pho[i].url;
+          i++;
+        }
+        window.onscroll = this._animate();
+        window.resize = this._update();
+      },
+      _update: function() {
+        screenY = window.innerHeight;
+        i = 0;
+        while (i < pho.length) {
+          this._check(i);
+          i++;
+        }
+      },
+      _check: function(i) {
+        if (pho[i].image.height < pho[i].offsetHeight) {
+          throw new Error("The image " + pho[i].url(+" (" + pho[i].image.height + "px) is too short for that container (" + pho[i].offsetHeight(+"px).")));
+        } else {
+          pho[i].diff = -(pho[i].image.height - pho[i].offsetHeight);
+          if (opt.invert) {
+            pho[i].diff = -pho[i].diff;
+          }
+        }
+      },
+      _animate: function() {
+        var per, position;
+        posY = window.pageYOffset !== void 0 ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+        i = 0;
+        while (i < pho.length) {
+          if (pho[i].image.height > pho[i].offsetHeight && ((posY + screenY) > pho[i].offsetTop) && window.getComputedStyle(pho[i], false).backgroundAttachment === "fixed") {
+            per = (posY - pho[i].offsetTop + screenY) * 100 / (pho[i].offsetHeight + screenY);
+            if (per < 0) {
+              per = 0;
+            }
+            if (per > 100) {
+              per = 100;
+            }
+            position = Math.round(((pho[i].diff * opt.speed) * (per - 50) / 100) * 100) / 100;
+          } else {
+            position = "center";
+          }
+          pho[i].style.backgroundPosition = "center " + position + "px";
+        }
+        i++;
+      }
+    };
+    return new Paraxify(el, options);
   };
-
-  window.onresize = function() {
-    var i;
-    screenY = window.innerHeight;
-    i = 0;
-    while (i < fotos.length) {
-      checkDimensions(i);
-      i++;
-    }
-  };
-
-  window.onload = function() {
-    var i;
-    screenY = window.innerHeight;
-    fotos = document.getElementsByClassName('paraxify');
-    i = 0;
-    while (i < fotos.length) {
-      fotos[i].url = window.getComputedStyle(fotos[i], false).backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2').split(',')[0];
-      fotos[i].image = new Image();
-      fotos[i].image.onload = setTimeout("checkDimensions(" + i + ")", 0);
-      fotos[i].image.src = fotos[i].url;
-      i++;
-    }
-    window.onscroll = animateParallax;
-  };
-
-}).call(this);
+  window.paraxify = paraxify;
+})(document, window, 0);

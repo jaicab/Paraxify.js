@@ -5,113 +5,161 @@
  MIT license
 ###
 
-"use strict"
+((document, window, index) ->
 
-posY = 0
-screenY = 0
-porcentaje = 0
-position = "center"
-fotos = 0
-speed = 2.5
+  "use strict"
 
+  paraxify = (el, options) ->
 
-
-
-window.calcParallax = (el) ->
-   
-
-  porcentaje = (posY - el.offsetTop+screenY)*100 / (el.offsetHeight + screenY)
-  
-  porcentaje = 0 if porcentaje < 0
-  porcentaje = 100 if porcentaje > 100
-
-  return Math.round(((el.diferencia * speed)  * (porcentaje - 50) / 100) * 100) / 100
-
-
-
-
-window.checkDimensions = (i) ->
-  
-  if fotos[i].image.height < fotos[i].offsetHeight
-    console.log("The image "+ fotos[i].url +" (" + fotos[i].image.height + "px) is too short for that container ("+ fotos[i].offsetHeight +"px).")
-
-  else
-    console.log("It's ok")
-    fotos[i].diferencia = -(fotos[i].image.height - fotos[i].offsetHeight)
-
-  return
-
-
-
-
-animateParallax = () ->
-
-  posY = if window.pageYOffset != undefined then window.pageYOffset else (document.documentElement || document.body.parentNode || document.body).scrollTop
-
-  i = 0
-  while i < fotos.length
-
-    #Do de parallax ONLY AND ONLY IF the image is bigger than the container AND the container is visible
-    if (
-      fotos[i].image.height > fotos[i].offsetHeight and
-      ((posY + screenY) > fotos[i].offsetTop) and
-      window.getComputedStyle(fotos[i],false).backgroundAttachment == "fixed"
-      )
-      position = calcParallax(fotos[i])
-
-    else
-      position = "center"
-
-    
-    fotos[i].style.backgroundPosition = "center " + position + "px"
-    
-
-    i++
-
-  return
-
-
-
-
-window.onresize = () ->
-
-  screenY =  window.innerHeight
-  
-  i = 0
-  while i < fotos.length
-
-    checkDimensions(i)
-
-    i++
-
-  return
-
-
-
-
-window.onload = () ->
-
-  #Get values on load
-  screenY = window.innerHeight
-  fotos = document.getElementsByClassName('paraxify')
+    computed = !!window.getComputedStyle
       
-  i = 0
-  while i < fotos.length
+    # getComputedStyle polyfill
+    if (!computed)
+      window.getComputedStyle = (el) ->
 
-    fotos[i].url = window.getComputedStyle(fotos[i],false)
-                      .backgroundImage
-                       .replace(/url\((['"])?(.*?)\1\)/gi, '$2')
-                        .split(',')[0]
+        this.el = el
+        
+        this.getPropertyValue = (prop) ->
+          re = /(\-([a-z]){1})/g
+          if prop == "float"
+            prop = "styleFloat"
+          if re.test(prop)
+            prop = prop.replace(re, ->
+              return arguments[2].toUpperCase()
+            )
+          return el.currentStyle[prop]
 
-    fotos[i].image = new Image()
-    fotos[i].image.onload = setTimeout("checkDimensions("+i+")", 0)
-    fotos[i].image.src = fotos[i].url
+        return this
 
-    i++
-    
-  window.onscroll = animateParallax
+    posY = 0
+    screenY = 0
+    i = 0
+    opt = {}
+    pho = []
+
+    Paraxify = (el, options) ->
+
+      this.options = {
+        invert: false
+        speed: 2.5
+      }
+
+      posY = 0
+      screenY = 0
+      i = 0
+
+      # User defined options
+      for i in options
+        this.options[i] = options[i]
+
+      # Classes
+      if document.getElementsByClassName(el.replace('.',''))
+        this.photos = document.getElementsByClassName(el.replace('.',''))
+
+      # Now query selector
+      #else if document.querySelector(el)!=false
+       # this.photos = querySelector(el)
+
+      # The element doesn't exist
+      else
+        throw new Error("The elements you're trying to select don't exist.")
+
+      # For minification
+      opt = this.options
+      pho = this.photos
+
+
+      this._init(this)
+
+      return
+
+
+    Paraxify.prototype = {
+
+      # Private methods
+
+      _init: ->
+        #Get values on load
+        screenY = window.innerHeight
+            
+        i = 0
+        while i < pho.length
+
+          pho[i].url = window.getComputedStyle(pho[i],false)
+                            .backgroundImage
+                             .replace(/url\((['"])?(.*?)\1\)/gi, '$2')
+                              .split(',')[0]
+
+          pho[i].image = document.createElement('img')
+          pho[i].image.onload = this._check(i)
+          pho[i].image.src = pho[i].url
+
+          i++
+          
+        window.onscroll = this._animate()
+        window.resize = this._update()
+
+        return
+
+
+      _update: () ->
+
+        screenY =  window.innerHeight
+        i = 0
+        while i < pho.length
+
+          this._check(i)
+
+          i++
+
+        return
+
+
+      _check: (i) ->
+
+        if pho[i].image.height < pho[i].offsetHeight
+          throw new Error("The image "+ pho[i].url +" (" + pho[i].image.height + "px) is too short for that container ("+ pho[i].offsetHeight +"px).")
+
+        else
+          pho[i].diff = -(pho[i].image.height - pho[i].offsetHeight)
+          pho[i].diff = -(pho[i].diff) if opt.invert
+
+        return
+
+
+      _animate: ->
+
+        posY = if window.pageYOffset != undefined then window.pageYOffset else (document.documentElement || document.body.parentNode || document.body).scrollTop
+
+        i = 0
+        while i < pho.length
+          #Do de parallax ONLY AND ONLY IF the image is bigger than the container AND the container is visible
+          if (pho[i].image.height > pho[i].offsetHeight and ((posY + screenY) > pho[i].offsetTop) and window.getComputedStyle(pho[i],false).backgroundAttachment == "fixed")
+
+            per = (posY - pho[i].offsetTop+screenY ) * 100 / (pho[i].offsetHeight + screenY)
+
+            per = 0 if per < 0
+            per = 100 if per > 100
+
+            position = Math.round(((pho[i].diff * opt.speed)  * (per - 50) / 100) * 100) / 100
+
+          else
+            position = "center"
+
+        
+          pho[i].style.backgroundPosition = "center " + position + "px"
+        
+
+        i++
+
+        return
+
+    }
+
+    return new Paraxify(el, options)
+
+  window.paraxify = paraxify
 
   return
 
-
-
+) document, window, 0
