@@ -17,11 +17,11 @@ I built this plugin because I couldn't find any other non-jquery plugins that fi
 	  background-position: center center;
 	  background-size: cover;
 	}
-
+```
 3. Now just start the JavaScript part:
 ```javascript
 	myParaxify = paraxify();
-
+```
 4. Ready to go! You should see the background images parallaxing.
 
 As long as the background is `fixed`, the images will scroll all the hidden part accordingly to the scroll position. This way you can control when it's active or not just switching the `background-attachment` property on CSS to scroll.
