@@ -1,4 +1,4 @@
-#Paraxify.js
+#[Paraxify.js](http://jaicab.github.io/Paraxify.js)
 
 Simple parallax lightweight plugin (less than **1.8kb gzipped**) built with Vanilla JS and CSS3 inspired by Spotify's website parallax effect. 
 
