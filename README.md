@@ -1,6 +1,6 @@
 #Paraxify.js
 
-Simple parallax lightweight plugin (less than **1.5kb gzipped**) built with Vanilla JS and CSS3 inspired by Spotify's website parallax effect. 
+Simple parallax lightweight plugin (less than **1.8kb gzipped**) built with Vanilla JS and CSS3 inspired by Spotify's website parallax effect. 
 
 It's been thought as a progressive enhancing plugin, so don't expect it to work exactly the same on all browsers, but it does work in all of them, in one way or another.
 
