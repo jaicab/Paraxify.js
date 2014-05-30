@@ -1,3 +1,2 @@
-
-*.codekit
 *.sass-cache
+*.codekit-cache
