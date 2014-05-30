@@ -11,27 +11,6 @@
 
   paraxify = (el, options) ->
 
-    computed = !!window.getComputedStyle
-      
-    # getComputedStyle polyfill
-    if (!computed)
-      window.getComputedStyle = (el) ->
-
-        this.el = el
-        
-        this.getPropertyValue = (prop) ->
-          re = /(\-([a-z]){1})/g
-          if prop == "float"
-            prop = "styleFloat"
-          if re.test(prop)
-            prop = prop.replace(re, ->
-              return arguments[2].toUpperCase()
-            )
-          return el.currentStyle[prop]
-
-        return this
-
-
     posY = 0
     screenY = 0
     i = 0

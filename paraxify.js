@@ -11,27 +11,7 @@
     "use strict";
     var paraxify;
     paraxify = function(el, options) {
-      var Paraxify, computed, contador, i, opt, pho, posY, screenY;
-      computed = !!window.getComputedStyle;
-      if (!computed) {
-        window.getComputedStyle = function(el) {
-          this.el = el;
-          this.getPropertyValue = function(prop) {
-            var re;
-            re = /(\-([a-z]){1})/g;
-            if (prop === "float") {
-              prop = "styleFloat";
-            }
-            if (re.test(prop)) {
-              prop = prop.replace(re, function() {
-                return arguments[2].toUpperCase();
-              });
-            }
-            return el.currentStyle[prop];
-          };
-          return this;
-        };
-      }
+      var Paraxify, contador, i, opt, pho, posY, screenY;
       posY = 0;
       screenY = 0;
       i = 0;
