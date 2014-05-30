@@ -9,7 +9,7 @@ I built this plugin because I couldn't find any other non-jquery plugins that fi
 
 ##How does it work?
 
-1. Start with a centered background image bigger than the element it's been set on.
+- Start with a centered background image **bigger** than the element it's been set on.
 - Add the paraxify class to the elements that you want to paraxify.
 
 ```css
