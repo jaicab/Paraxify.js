@@ -131,7 +131,7 @@
             this._check(i)
 
           # Initial difference - Minimum parallax
-          main.diff = -(actualHeight - main.offsetHeight)
+          main.diff = -(actualHeight - main.offsetHeight) - ((screenY - pho[i].offsetHeight))
 
           #Speed up! - From 0 to 100% of the container
           main.diff = main.diff - (main.offsetHeight * opt.speed)
@@ -154,6 +154,7 @@
         i = 0
         while i < pho.length
           #Do de parallax ONLY AND ONLY IF the image is bigger than the container AND the container is visible
+          this._check(i)
           if (pho[i].ok and ((posY + screenY) > pho[i].offsetTop) and ((posY) < pho[i].offsetTop + pho[i].offsetHeight) and window.getComputedStyle(pho[i],false).backgroundAttachment == "fixed")
 
             per = (posY - pho[i].offsetTop + screenY ) * 100 / (pho[i].offsetHeight + screenY)
@@ -161,7 +162,7 @@
             per = 0 if per < 0
             per = 100 if per > 100
 
-            position = Math.round((((pho[i].diff + (screenY - pho[i].img.height))  * (per - 50) / 100)) * 100) / 100
+            position = Math.round(((pho[i].diff  * (per - 50) / 100) + ((screenY - pho[i].img.height) / 2 )) * 100) / 100
 
           else
             position = "center"
