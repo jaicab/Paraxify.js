@@ -39,6 +39,11 @@ h1,h2,h3,h4,h5,h6{
 h1{
   font-size: 3em;
 }
+.description{
+  font-size: 1.5em;
+  font-weight: normal;
+  margin: 1em 0;
+}
 footer{
   font-size: 0.6em;
   padding: 1em 0;
@@ -194,6 +199,7 @@ ul{
   h2{
     font-size: 2.5em;
   }
+  
   p, ul, ol{
     font-size: 1.2em;
   }
@@ -210,7 +216,7 @@ ul{
   }
 
   .bloque.foto{
-    height: 550px;
+    height: 750px;
   }
   .foto.intro{
     height: 100%;

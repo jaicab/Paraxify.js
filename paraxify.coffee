@@ -131,7 +131,7 @@
             this._check(i)
 
           # Initial difference - Minimum parallax
-          main.diff = -(actualHeight - main.offsetHeight)*1.5
+          main.diff = -(actualHeight - main.offsetHeight)
 
           #Speed up! - From 0 to 100% of the container
           main.diff = main.diff - (main.offsetHeight * opt.speed)
@@ -140,6 +140,10 @@
 
 
         return
+
+      _isTouch: ->
+        return Modernizr.touch if Modernizr
+        return false
 
       _animate: ->
         if window.pageYOffset != undefined
@@ -157,7 +161,7 @@
             per = 0 if per < 0
             per = 100 if per > 100
 
-            position = Math.round((pho[i].diff  * (per - 50) / 100) * 100) / 100
+            position = Math.round((((pho[i].diff + (screenY - pho[i].img.height))  * (per - 50) / 100)) * 100) / 100
 
           else
             position = "center"
