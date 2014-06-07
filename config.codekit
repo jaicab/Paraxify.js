@@ -129,7 +129,7 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/paraxify.coffee",
-		"minifyOutput": 0,
+		"minifyOutput": 1,
 		"outputAbbreviatedPath": "\/paraxify.min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 1,

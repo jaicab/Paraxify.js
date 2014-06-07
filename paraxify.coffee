@@ -21,7 +21,8 @@
     Paraxify = (el, options) ->
 
       this.options = {
-        speed: 0
+        speed: 1,
+        boost: 0
       }
 
       # User defined options
@@ -109,19 +110,20 @@
 
         main = pho[i]
         main.ok = true
+        main.bgSize = window.getComputedStyle(main,false).backgroundSize
         actualHeight = screenY
-        bgSize = window.getComputedStyle(main,false).backgroundSize
 
         pho[i].img.onload = ->
           
-          if bgSize == '' or bgSize == 'auto'
+          if main.bgSize == '' or main.bgSize == 'auto'
             if this.height < main.offsetHeight
               main.ok = false
               throw new Error("The image " + main.url + " (" + this.height + "px) is too short for that container (" + main.offsetHeight + "px).")
             else
               actualHeight = this.height
+              actualHeight = actualHeight + ((screenY - main.offsetHeight) * opt.speed) if this.height < screenY
 
-          else if bgSize == 'cover'
+          else if main.bgSize == 'cover'
             if screenY < main.offsetHeight
               main.ok = false
               throw new Error("The container (" + main.offsetHeight + "px) can't be bigger than the image (" + screenY + "px). Try removing background-size: cover;")
@@ -131,10 +133,10 @@
             this._check(i)
 
           # Initial difference - Minimum parallax
-          main.diff = -(actualHeight - main.offsetHeight) - ((screenY - pho[i].offsetHeight))
+          main.diff = -(actualHeight - main.offsetHeight) * opt.speed
 
           #Speed up! - From 0 to 100% of the container
-          main.diff = main.diff - (main.offsetHeight * opt.speed)
+          main.diff = main.diff - (main.offsetHeight * opt.boost)
 
           return
 
@@ -162,7 +164,9 @@
             per = 0 if per < 0
             per = 100 if per > 100
 
-            position = Math.round(((pho[i].diff  * (per - 50) / 100) + ((screenY - pho[i].img.height) / 2 )) * 100) / 100
+            position = pho[i].diff * (per - 50) / 100
+            position = position + ((screenY - pho[i].img.height) / 2) if pho[i].bgSize == '' or pho[i].bgSize == 'auto'
+            position = Math.round(position * 100) / 100
 
           else
             position = "center"
