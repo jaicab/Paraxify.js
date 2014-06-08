@@ -132,7 +132,7 @@
 
             if screenY < main.offsetHeight
               main.ok = false
-              throw new Error("The container (" + main.offsetHeight + "px) can't be bigger than the image (" + screenY + "px). Try removing background-size: cover;")
+              throw new Error("The container (" + main.offsetHeight + "px) can't be bigger than the image (" + screenY + "px).")
 
 
           else
@@ -150,10 +150,6 @@
 
 
         return
-
-      _isTouch: ->
-        return Modernizr.touch if Modernizr
-        return false
 
       _visible: (i) ->
         if ((posY + screenY) > pho[i].offsetTop) and ((posY) < pho[i].offsetTop + pho[i].offsetHeight)
@@ -175,10 +171,10 @@
           if (pho[i].ok and window.getComputedStyle(pho[i],false).backgroundAttachment == "fixed" and this._visible(i))
 
             # Percentage of the position
-            per = (posY - pho[i].offsetTop + screenY ) * 100 / (pho[i].offsetHeight + screenY)
+            per = (posY - pho[i].offsetTop + screenY ) / (pho[i].offsetHeight + screenY)
 
             # Removes 50% so it shares the scroll between the top and the bottom
-            position = pho[i].diff * (per - 50) / 100
+            position = pho[i].diff * (per - 0.5)
 
             # If it's not cover, center it
             position = position + ((screenY - pho[i].img.height) / 2) if pho[i].bgSize != 'cover'
