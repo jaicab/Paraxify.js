@@ -21,7 +21,8 @@
     Paraxify = (el, options) ->
 
       this.options = {
-        speed: 1
+        speed: 1,
+        boost: 0
       }
 
       # User defined options
@@ -41,7 +42,7 @@
       else if document.querySelector(el)!=false
         this.photos = querySelector(el)
 
-      # The element doesn't exist
+      # The elements don't exist
       else
         throw new Error("The elements you're trying to select don't exist.")
 
@@ -57,30 +58,48 @@
 
     Paraxify.prototype = {
 
-      # Private methods
+      # Public methods
+      update: () ->
 
-      _init: ->
-        #Get values on load
-        screenY = window.innerHeight
+        screenY =  window.innerHeight
+
         i = 0
         while i < pho.length
+           
+          pho[i].style.backgroundPosition = "center center"
 
+          # Update the URL
           pho[i].url = window.getComputedStyle(pho[i],false)
                             .backgroundImage
                              .replace(/url\((['"])?(.*?)\1\)/gi, '$2')
                               .split(',')[0]
+          
+          # Check if new or update
+          if !pho[i].img
+            pho[i].img = new Image()
 
-          pho[i].img = new Image()
-          this._check(i)
-          pho[i].img.src = pho[i].url
+          if pho[i].url != pho[i].img.src
+            this._check(i)
+            pho[i].img.src = pho[i].url
 
           i++
+
+        this._animate()
+        return
+
+      # Private methods
+
+      _init: ->
+
+        #Get values on load
+        this.update()
           
         window.onscroll = (->
           this._animate()
           return
         ).bind(this)
-        window.resize = (->
+
+        window.onresize = (->
           this.update()
           return
         ).bind(this)
@@ -88,32 +107,55 @@
         return
 
 
-      _update: () ->
-
-        screenY =  window.innerHeight
-        i = 0
-        while i < pho.length
-
-          this._check(i)
-
-          i++
-
-        return
-
-
       _check: (i) ->
 
         main = pho[i]
+        main.ok = true
+        main.bgSize = window.getComputedStyle(main,false).backgroundSize
+        actualHeight = screenY
 
         pho[i].img.onload = ->
-          if this.height < main.offsetHeight
-            throw new Error("The image "+ main.url +" (" + this.height + "px) is too short for that container ("+ main.offsetHeight +"px).")
+          
+          if main.bgSize == '' or main.bgSize == 'auto'
+
+            if this.height < main.offsetHeight
+              main.ok = false
+              throw new Error("The image " + main.url + " (" + this.height + "px) is too short for that container (" + main.offsetHeight + "px).")
+
+            else
+              actualHeight = this.height
+
+              # If the image is smaller than the screen, we need to add that difference
+              actualHeight = actualHeight + ((screenY - main.offsetHeight) * opt.speed) if this.height < screenY
+
+
+          else if main.bgSize == 'cover'
+
+            if screenY < main.offsetHeight
+              main.ok = false
+              throw new Error("The container (" + main.offsetHeight + "px) can't be bigger than the image (" + screenY + "px).")
+
+
           else
-            main.diff = -(this.height - main.offsetHeight)
+            window.getComputedStyle(main,false).backgroundSize == 'cover'
+            this._check(i)
+
+
+          # Initial difference - Minimum parallax
+          main.diff = -(actualHeight - main.offsetHeight) * opt.speed
+
+          #Speed up! - From 0 to 100% of the container
+          main.diff = main.diff - (main.offsetHeight * opt.boost)
+
           return
 
 
         return
+
+      _visible: (i) ->
+        if ((posY + screenY) > pho[i].offsetTop) and ((posY) < pho[i].offsetTop + pho[i].offsetHeight)
+          return true
+        return false
 
       _animate: ->
         if window.pageYOffset != undefined
@@ -123,24 +165,31 @@
 
         i = 0
         while i < pho.length
+
+          this._check(i)
+
           #Do de parallax ONLY AND ONLY IF the image is bigger than the container AND the container is visible
-          if (pho[i].img.height > pho[i].offsetHeight and ((posY + screenY) > pho[i].offsetTop) and window.getComputedStyle(pho[i],false).backgroundAttachment == "fixed")
+          if (pho[i].ok and window.getComputedStyle(pho[i],false).backgroundAttachment == "fixed" and this._visible(i))
 
-            per = (posY - pho[i].offsetTop + screenY ) * 100 / (pho[i].offsetHeight + screenY)
+            # Percentage of the position
+            per = (posY - pho[i].offsetTop + screenY ) / (pho[i].offsetHeight + screenY)
 
-            per = 0 if per < 0
-            per = 100 if per > 100
+            # Removes 50% so it shares the scroll between the top and the bottom
+            position = pho[i].diff * (per - 0.5)
 
-            position = Math.round(((pho[i].diff * opt.speed)  * (per - 50) / 100) * 100) / 100
+            # If it's not cover, center it
+            position = position + ((screenY - pho[i].img.height) / 2) if pho[i].bgSize != 'cover'
+
+            # Round it up!
+            position = Math.round(position * 100) / 100
 
           else
             position = "center"
 
+          # Here's the result
           pho[i].style.backgroundPosition = "center " + position + "px"
         
           i++
-
-
 
         return
 
