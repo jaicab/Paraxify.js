@@ -32,11 +32,11 @@ IMPORTANT: Parallax and touch devices usually don't get along. So I highly sugge
 
 ```javascript
 if(!Modernizr.touch){
-myParaxify = paraxify('.paraxify');
+	myParaxify = paraxify('.paraxify');
 }
 ```
 
-As long as the background is `fixed`, the images will scroll all the hidden part accordingly to the scroll position. This way you can control when it's active or not just switching the `background-attachment` property on CSS to `scroll`.
+As long as the background is `fixed`, the images will scroll all the hidden part accordingly to the scroll position. This way **you can control** when it's active or not just switching the `background-attachment` property on CSS to `scroll`.
 
 I wanted the background to be fixed so it creates a nice pure CSS parallax effect in case the JavaScript is not supported or disabled in the browser. I had performance in mind when I built this plugin, so **only the visibe photos are scrolled**.
 
@@ -52,10 +52,10 @@ On `selector` you can set any selector, but a class is more retro-compatible. Al
 
 The speed is determined by the difference between the element's height and the image's. However, you can slow it down or boost it up using the options' array avalible:
 
-- `speed (float, 0 to 1, 1 by default)`: It's proportional to the hidden part of the image.
+- `speed` (float, 0 to 1, 1 by default): It's proportional to the hidden part of the image.
 	- 0: It would be completely stopped.
 	- 1: It would scroll all the hidden part of the background image.
-- `boost (float, 0 to 1, 0 by default)`: Boost uses the visible part of the image to speed the scroll speed a bit.
+- `boost` (float, 0 to 1, 0 by default): Boost uses the visible part of the image to speed the scroll speed a bit.
 	- 0: There wouldn't be a boost.
 	- 1: It would scroll all the visible part of the background image.
 
