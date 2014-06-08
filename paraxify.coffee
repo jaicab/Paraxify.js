@@ -98,6 +98,7 @@
           this._animate()
           return
         ).bind(this)
+
         window.onresize = (->
           this.update()
           return

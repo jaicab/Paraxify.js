@@ -47,10 +47,16 @@
 </pre>
           <li>Now just start the JavaScript part:</li>
 <pre>
-myParaxify = paraxify();
+myParaxify = paraxify('.paraxify');
 </pre>
           <li>Ready to go! You should see the background images parallaxing.</li>
         </ol>
+        <p><b>IMPORTANT:</b> Parallax and touch devices usually don't get along. So I highly suggest you to use <a title="modernizr" target="_blank" href="http://modernizr.com/download/">modernizr's</a> touch events. For example:</p>
+<pre>
+  if(!Modernizr.touch){
+    myParaxify = paraxify('.paraxify');
+  }
+</pre>
       </div>
    </div> 
     
@@ -59,12 +65,30 @@ myParaxify = paraxify();
     
    <div class="bloque texto">
     <div class="content">
+
+      <div class="example"></div>
+
       <h2>Nice, isn't it?</h2>
-      <p>Let me tell you how this works. I think you'll like it.</p>
-      <p>As long as the background is <code>fixed</code>, the images will <b>scroll all the hidden part</b> accordingly to the scroll position. This way you can control when it's active or not just switching the <code>background-attachment</code> property on CSS to <code>scroll</code>.</p>
-      <p>The speed is determined by the difference between the element's height and the image's.</p>
+
+      <p>The speed is determined by the difference between the element's height and the image's. However, you can slow it down or boost it up using the options avalible:</p>
+      <ul>
+        <li><code>speed (float, 0 to 1, 1 by default)</code>: It's proportional to the hidden part of the image.
+          <ul>
+            <li><code>0</code>: It would be completely stopped.</li>
+            <li><code>1</code>: It would scroll all the hidden part of the background image.
+          </ul>
+        </li>
+        <li><code>boost (float, 0 to 1, 0 by default)</code>: Boost uses the visible part of the image to speed the scroll speed a bit.
+          <ul>
+            <li><code>0</code>: There wouldn't be a boost.</li>
+            <li><code>1</code>: It would scroll all the visible part of the background image.
+          </ul>
+        </li>
+      </ul>
+      <p>So <b>by default</b> it scrolls all the hidden part but none of the visible.</p>
+
+      <p>I had performance in mind when I built this plugin, so <b>only the visibe photos are scrolled</b>. As long as the background is <b><code>fixed</code></b>, the images will <b>scroll all the hidden part</b> accordingly to the scroll position. This way you can control when it's active or not just switching the <code>background-attachment</code> property on CSS to <code>scroll</code>.</p>
       <p>I wanted the background to be <code>fixed</code> so it creates a nice pure CSS parallax effect in case the JavaScript is not supported or disabled in the browser. Go on, try disabling JavaScript!</p>
-      <p>I had performance in mind when I built this plugin, so <b>only the visibe photos are scrolled</b>.</p>
     </div>
    </div> 
     

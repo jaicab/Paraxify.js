@@ -4,13 +4,17 @@
 $color: #7EA613;
 $triangle: 2em;
 
+$example-height: 300px;
+
 @mixin gradient($from, $to) {
   background: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
   background: -moz-linear-gradient(top,  $from, $to);
   filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}');
 }
 
-*{
+*,
+*:before,
+*:after{
   box-sizing: border-box;
 }
 
@@ -161,6 +165,26 @@ ul{
   transform: scale(1.2);
 }
 
+@keyframes parallax-bg {
+  from{
+    background-position: center 0;
+  }
+  to{
+    background-position: center 100px;
+  }
+}
+@keyframes parallax {
+  from{
+    background-position: center -100px;
+  }
+  to{
+    background-position: center 0;
+  }
+}
+
+
+
+
 /* The images */
 .foto.intro{
   height: auto;
@@ -200,8 +224,12 @@ ul{
     font-size: 2.5em;
   }
   
-  p, ul, ol{
-    font-size: 1.2em;
+  p, ul, ol, ul ul, pre{
+    font-size: 1.2rem;
+  }
+
+  ul ul{
+    padding-bottom: .5em;
   }
 
   .over{
@@ -221,6 +249,62 @@ ul{
   .foto.intro{
     height: 100%;
   }
+
+  :root .example{
+    width: 150px;
+    float: right;
+    left: 1em;
+    height: $example-height;
+    border: 1px solid #333;
+    background: #CCC;
+    background-image: url("img/1.jpg");
+    background-size: auto 200px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin: 0 auto;
+    position: relative;
+    animation: parallax-bg 1.5s ease-in-out infinite alternate;
+
+
+    &:before{
+      content: '';
+      display: block;
+      height: 100%;
+      background: $color;
+      background: rgba($color, 0.7);
+
+      color: white;
+      text-align: center;
+      line-height: ($example-height - 100px) / 2;
+    }
+
+    &:hover:after,
+    &:focus:before,
+    &:active:before{
+      content: '';
+    }
+
+    &:after{
+      content: '.paraxify';
+      position: absolute;
+      top: 0; left: 0;  right: 0; bottom: 0;
+      margin: auto;
+      display: inline-block;
+      height: 100px;
+
+      background: #CCC;
+      color: white;
+      background-image: url("img/1.jpg");
+      background-size: auto 200px;
+      background-repeat: no-repeat;
+      background-position: center center;
+      text-align: center;
+      line-height: 100px;
+
+      animation: parallax 1.5s ease-in-out infinite alternate;
+    }
+  }
+
 }
 
 @media screen and (min-width: 60em){
