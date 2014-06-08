@@ -2,7 +2,7 @@
 
 Simple lightweight parallax plugin (around **2kb gzipped**) built with Vanilla JS and CSS3 inspired by Spotify's website parallax effect. 
 
-It's been thought as a progressive enhancing plugin, so don't expect it to work exactly the same on all browsers, but it does work in all of them, in one way or another.
+It's been thought as a **progressive enhancing** plugin, so don't expect it to work exactly the same on all browsers, but it does work in all of them, in one way or another.
 
 I built this plugin because I couldn't find any other non-jquery plugins that fit my needs. 
 
