@@ -116,21 +116,29 @@
         pho[i].img.onload = ->
           
           if main.bgSize == '' or main.bgSize == 'auto'
+
             if this.height < main.offsetHeight
               main.ok = false
               throw new Error("The image " + main.url + " (" + this.height + "px) is too short for that container (" + main.offsetHeight + "px).")
+
             else
               actualHeight = this.height
+
+              # If the image is smaller than the screen, we need to add that difference
               actualHeight = actualHeight + ((screenY - main.offsetHeight) * opt.speed) if this.height < screenY
 
+
           else if main.bgSize == 'cover'
+
             if screenY < main.offsetHeight
               main.ok = false
               throw new Error("The container (" + main.offsetHeight + "px) can't be bigger than the image (" + screenY + "px). Try removing background-size: cover;")
 
+
           else
             window.getComputedStyle(main,false).backgroundSize == 'cover'
             this._check(i)
+
 
           # Initial difference - Minimum parallax
           main.diff = -(actualHeight - main.offsetHeight) * opt.speed
@@ -147,6 +155,11 @@
         return Modernizr.touch if Modernizr
         return false
 
+      _visible: (i) ->
+        if ((posY + screenY) > pho[i].offsetTop) and ((posY) < pho[i].offsetTop + pho[i].offsetHeight)
+          return true
+        return false
+
       _animate: ->
         if window.pageYOffset != undefined
           posY = window.pageYOffset
@@ -155,27 +168,31 @@
 
         i = 0
         while i < pho.length
-          #Do de parallax ONLY AND ONLY IF the image is bigger than the container AND the container is visible
-          this._check(i)
-          if (pho[i].ok and ((posY + screenY) > pho[i].offsetTop) and ((posY) < pho[i].offsetTop + pho[i].offsetHeight) and window.getComputedStyle(pho[i],false).backgroundAttachment == "fixed")
 
+          this._check(i)
+
+          #Do de parallax ONLY AND ONLY IF the image is bigger than the container AND the container is visible
+          if (pho[i].ok and window.getComputedStyle(pho[i],false).backgroundAttachment == "fixed" and this._visible(i))
+
+            # Percentage of the position
             per = (posY - pho[i].offsetTop + screenY ) * 100 / (pho[i].offsetHeight + screenY)
 
-            per = 0 if per < 0
-            per = 100 if per > 100
-
+            # Removes 50% so it shares the scroll between the top and the bottom
             position = pho[i].diff * (per - 50) / 100
-            position = position + ((screenY - pho[i].img.height) / 2) if pho[i].bgSize == '' or pho[i].bgSize == 'auto'
+
+            # If it's not cover, center it
+            position = position + ((screenY - pho[i].img.height) / 2) if pho[i].bgSize != 'cover'
+
+            # Round it up!
             position = Math.round(position * 100) / 100
 
           else
             position = "center"
 
+          # Here's the result
           pho[i].style.backgroundPosition = "center " + position + "px"
         
           i++
-
-
 
         return
 
