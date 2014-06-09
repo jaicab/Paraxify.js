@@ -166,18 +166,18 @@ ul{
 }
 
 @keyframes parallax-bg {
-  from{
+  0%{
     background-position: center 0;
   }
-  to{
+  100%{
     background-position: center 100px;
   }
 }
 @keyframes parallax {
-  from{
+  0%{
     background-position: center -100px;
   }
-  to{
+  100%{
     background-position: center 0;
   }
 }
@@ -244,7 +244,7 @@ ul{
   }
 
   .bloque.foto{
-    height: 700px;
+    height: 500px;
   }
   .foto.intro{
     height: 100%;
