@@ -189,21 +189,22 @@ ul{
 .foto.intro{
   height: auto;
   background-attachment: scroll;
+  background-size: cover;
   background-position: center center;
-  background-image: url("img/intro.jpg");
+  background-image: url("img/intro_small.jpg");
 }
 
 .foto.foto-1{
-  background-image: url("img/1.jpg");
+  background-image: url("img/1_small.jpg");
 }
 .foto.foto-2{
-  background-image: url("img/2.jpg");
+  background-image: url("img/2_small.jpg");
 }
 .foto.foto-3{
-  background-image: url("img/3.jpg");
+  background-image: url("img/3_small.jpg");
 }
 .foto.foto-4{
-  background-image: url("img/4.jpg");
+  background-image: url("img/4_small.jpg");
 }
 
 @media screen and (min-width: 40em){
@@ -248,6 +249,7 @@ ul{
   }
   .foto.intro{
     height: 100%;
+    background-image: url("img/intro.jpg");
   }
 
   :root .example{
@@ -311,5 +313,19 @@ ul{
 @media screen and (min-width: 60em){
   .paraxify{
     background-attachment: fixed;
+  }
+
+
+  .foto.foto-1{
+    background-image: url("img/1.jpg");
+  }
+  .foto.foto-2{
+    background-image: url("img/2.jpg");
+  }
+  .foto.foto-3{
+    background-image: url("img/3.jpg");
+  }
+  .foto.foto-4{
+    background-image: url("img/4.jpg");
   }
 }

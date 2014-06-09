@@ -13,18 +13,22 @@
   <meta name="twitter:creator" content="@jaicab_">
   <meta name="twitter:image:src" content="http://jaicab.github.io/Paraxify.js/img/intro.jpg">
 
+  <meta property="og:title" content="Paraxify.js" />
+  <meta property="og:url" content="http://jaicab.github.io/Paraxify.js/" />
+  
   <link rel="stylesheet" href="main.css">
 </head>
-<body>
+<body itemscope itemtype="http://schema.org/Thing">
+  <meta itemprop="url" content="http://jaicab.github.io/Paraxify.js/">
 
-  <header><strong>Paraxify.js</strong></header>
+  <header><strong itemprop="name">Paraxify.js</strong></header>
     
   <a href="https://github.com/jaicab/Paraxify.js"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 1000" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
-   <div class="bloque foto intro" id="top">
+   <div class="bloque foto intro" role="main" id="top">
      <div class="over">
       <h1>Parallax for everyone.</h1>
-      <h2 class="description">The <strong>lightest</strong> parallax plugin that <strong>enhances progressively</strong> from basic background images to a nice parallax effect.</h2>
+      <h2 class="description" itemprop="description">The <strong>lightest</strong> parallax plugin that <strong>enhances progressively</strong> from basic background images to a nice parallax effect.</h2>
       <a rel="download" href="https://github.com/jaicab/Paraxify.js/archive/master.zip" class="button">Download Paraxify.js</a>
 
       <div class="share">
@@ -120,7 +124,7 @@ myParaxify = paraxify('.paraxify');
     
     <div class="bloque paraxify foto foto-4">
    </div>
-  <footer>
+  <footer role="contentinfo">
     <a class="toTop" href="#top" title="Back to top">^</a>
     <p>&copy;2014 - Made with pride by <a href="http://jaicab.com">Jaime Caballero</a></p>
     <p>Check it out on <a href="http://github.com/jaicab/Paraxify.js">GitHub</a></p>
@@ -128,7 +132,7 @@ myParaxify = paraxify('.paraxify');
   
   <script type="text/javascript" src="paraxify.min.js"></script>
   <script>
-  parallax = paraxify()
+  myParaxify = paraxify('.paraxify');
   </script>
 </body>
 </html>
