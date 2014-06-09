@@ -68,10 +68,9 @@ At last but not least, you can access all the background info that paraxify calc
 
 ##TODO
 
-- [I'M ON IT] Detect URL image changes (responsive design or any other) and update `diff` accordingly.
+- [I'M ON IT] Option to scroll horizontally as well as vertically.
 - [HOLD] Fix buggy behaviour on +IE9: The scrolling is not smooth.
 - [HOLD] Try debouncing scroll event so it doesn't launch a bizillion times per second.
-- [HOLD] Option to scroll horizontally as well as vertically.
 
 ##Contributing
 
