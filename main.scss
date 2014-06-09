@@ -4,7 +4,7 @@
 $color: #7EA613;
 $triangle: 2em;
 
-$example-height: 300px;
+$example-height: 250px;
 
 @mixin gradient($from, $to) {
   background: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
@@ -170,12 +170,12 @@ ul{
     background-position: center 0;
   }
   100%{
-    background-position: center 100px;
+    background-position: center 50px;
   }
 }
 @keyframes parallax {
   0%{
-    background-position: center -100px;
+    background-position: center -50px;
   }
   100%{
     background-position: center 0;
@@ -251,7 +251,7 @@ ul{
   }
 
   :root .example{
-    width: 150px;
+    width: 200px;
     float: right;
     left: 1em;
     height: $example-height;
@@ -260,10 +260,10 @@ ul{
     background-image: url("img/1.jpg");
     background-size: auto 200px;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center 0;
     margin: 0 auto;
     position: relative;
-    animation: parallax-bg 1.5s ease-in-out infinite alternate;
+    transition: 1s;
 
 
     &:before{
@@ -271,17 +271,20 @@ ul{
       display: block;
       height: 100%;
       background: $color;
-      background: rgba($color, 0.7);
+      background: rgba($color, 0.5);
 
       color: white;
       text-align: center;
-      line-height: ($example-height - 100px) / 2;
+      line-height: ($example-height - 150px) / 2;
     }
 
-    &:hover:after,
-    &:focus:before,
-    &:active:before{
-      content: '';
+    &:hover,
+    &:focus,
+    &:active{
+      animation: parallax-bg 1s ease-in-out infinite alternate;
+      &:after{
+        animation: parallax 1s ease-in-out infinite alternate;
+      }
     }
 
     &:after{
@@ -290,18 +293,16 @@ ul{
       top: 0; left: 0;  right: 0; bottom: 0;
       margin: auto;
       display: inline-block;
-      height: 100px;
+      height: 150px;
 
       background: #CCC;
       color: white;
       background-image: url("img/1.jpg");
       background-size: auto 200px;
       background-repeat: no-repeat;
-      background-position: center center;
+      background-position: center -50px;
       text-align: center;
-      line-height: 100px;
-
-      animation: parallax 1.5s ease-in-out infinite alternate;
+      line-height: 150px;
     }
   }
 
