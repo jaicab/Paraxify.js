@@ -122,24 +122,13 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/img\/intro_big.jpg": {
+	"\/img\/intro.jpg": {
 		"fileType": 16384,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"initialSize": 241567,
-		"inputAbbreviatedPath": "\/img\/intro_big.jpg",
-		"outputAbbreviatedPath": "\/img\/intro_big.jpg",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/img\/intro_medium.jpg": {
-		"fileType": 16384,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 116678,
-		"inputAbbreviatedPath": "\/img\/intro_medium.jpg",
-		"outputAbbreviatedPath": "\/img\/intro_medium.jpg",
+		"inputAbbreviatedPath": "\/img\/intro.jpg",
+		"outputAbbreviatedPath": "\/img\/intro.jpg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -196,15 +185,15 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/paraxify.coffee",
 		"minifyOutput": 1,
-		"outputAbbreviatedPath": "\/paraxify.min.js",
+		"outputAbbreviatedPath": "\/paraxify.js",
 		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 1,
-		"outputStyle": 1,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
 		"syntaxCheckerStyle": 1
 		},
 	"\/paraxify.min.js": {
 		"fileType": 64,
-		"ignore": 1,
+		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/paraxify.min.js",
 		"outputAbbreviatedPath": "\/min\/paraxify.min-ck.js",
