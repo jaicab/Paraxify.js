@@ -1,10 +1,10 @@
 #[Paraxify.js](http://jaicab.github.io/Paraxify.js)
 
-Simple lightweight parallax plugin (around **2kb gzipped**) built with Vanilla JS and CSS3 inspired by Spotify's website parallax effect. 
+Simple lightweight parallax plugin (around **2kb gzipped**) built with Vanilla JS and CSS3 inspired by Spotify's website parallax effect.
 
 It's been thought as a **progressive enhancing** plugin, so don't expect it to work exactly the same on all browsers, but it does work in all of them, in one way or another.
 
-I built this plugin because I couldn't find any other non-jquery plugins that fit my needs. 
+I built this plugin because I couldn't find any other non-jquery plugins that fit my needs.
 
 
 ##How does it work?
@@ -20,7 +20,7 @@ I built this plugin because I couldn't find any other non-jquery plugins that fi
 }
 ```
 
-- Now just start the JavaScript part:
+- Now just start the JavaScript part **at the end of your document**:
 
 ```javascript
 myParaxify = paraxify('.paraxify');
@@ -42,7 +42,7 @@ I wanted the background to be fixed so it creates a nice pure CSS parallax effec
 
 ##Advanced use
 You can set any other selector actually. The `paraxify` function has two parameters:
-	
+
 	var myParaxify = paraxify('selector', {
 		speed: 1,
 		boost: 0
