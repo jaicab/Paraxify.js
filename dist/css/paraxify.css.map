@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": ";AAAA,SACU;EACT,qBAAqB,EAAE,KAAK;EAC5B,mBAAmB,EAAE,aAAa;EAClC,eAAe,EAAE,KAAK",
+"sources": ["../../paraxify.scss"],
+"names": [],
+"file": "paraxify.css"
+}

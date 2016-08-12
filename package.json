@@ -1,0 +1,21 @@
+{
+  "name": "paraxify.js",
+  "version": "0.1.0",
+  "description": "Simple lightweight parallax plugin built with Vanilla JS and CSS3 inspired by Spotify's website parallax effect.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaicab/Paraxify.js.git"
+  },
+  "author": "Jaime Caballero",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jaicab/Paraxify.js/issues"
+  },
+  "homepage": "https://github.com/jaicab/Paraxify.js#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-coffee": "^1.0.0",
+    "grunt-contrib-compass": "^1.1.1",
+    "grunt-contrib-uglify": "^2.0.0"
+  }
+}
