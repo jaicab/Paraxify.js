@@ -95,7 +95,15 @@
             window.getComputedStyle(main, false).backgroundSize === 'cover';
             that._check(i);
           }
-          main.diff = -(actualHeight - main.offsetHeight) * opt.speed;
+          
+          if (actualHeight !== main.offsetHeight) {
+              main.diff = -(actualHeight - main.offsetHeight);
+          } else {
+              main.diff = -actualHeight;
+          }
+                    
+          main.diff *= opt.speed;
+         
           main.diff = main.diff - (main.offsetHeight * opt.boost);
         };
       },
