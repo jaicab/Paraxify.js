@@ -1,4 +1,4 @@
-#[Paraxify.js](http://jaicab.github.io/Paraxify.js)
+# [Paraxify.js](http://jaicab.github.io/Paraxify.js)
 
 Simple lightweight parallax plugin (around **2kb gzipped**) built with Vanilla JS and CSS3 inspired by Spotify's website parallax effect. 
 
@@ -7,7 +7,7 @@ It's been thought as a **progressive enhancing** plugin, so don't expect it to w
 I built this plugin because I couldn't find any other non-jquery plugins that fit my needs. 
 
 
-##How does it work?
+## How does it work?
 
 - Start with a centered background image **bigger** than the element it's been set on.
 - Add the paraxify class to the elements that you want to paraxify.
@@ -40,7 +40,7 @@ As long as the background is `fixed`, the images will scroll all the hidden part
 
 I wanted the background to be fixed so it creates a nice pure CSS parallax effect in case the JavaScript is not supported or disabled in the browser. I had performance in mind when I built this plugin, so **only the visibe photos are scrolled**.
 
-##Advanced use
+## Advanced use
 You can set any other selector actually. The `paraxify` function has two parameters:
 	
 	var myParaxify = paraxify('selector', {
@@ -66,18 +66,18 @@ At last but not least, you can access all the background info that paraxify calc
 	myParaxify.photos
 
 
-##TODO
+## TODO
 
 - [I'M ON IT] Option to scroll horizontally as well as vertically.
 - [HOLD] Fix buggy behaviour on +IE9: The scrolling is not smooth.
 - [HOLD] Try debouncing scroll event so it doesn't launch a bizillion times per second.
 
-##Contributing
+## Contributing
 
 Please, feel free to fork the project and modify it as you wish. Just try to keep it __light and working__. Send me a pull request and I'll review it as soon as possible. Any new feature is welcome aboard.
 
 If you feel like discussing a new feature or you've found a bug, open an issue or contact me on twitter ([@jaicab_](http://twitter.com/jaicab_)) so we can talk about it.
 
 
-##MIT License
+## MIT License
 Paraxify has been coded from scratch by [Jaime Caballero](http://jaicab.com) and it's licensed under **MIT License**.
