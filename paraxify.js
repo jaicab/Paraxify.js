@@ -74,6 +74,7 @@
         main.ok = true;
         main.bgSize = window.getComputedStyle(main, false).backgroundSize;
         actualHeight = screenY;
+        var that = this;
         pho[i].img.onload = function() {
           if (main.bgSize === '' || main.bgSize === 'auto') {
             if (this.height < main.offsetHeight) {
@@ -92,7 +93,7 @@
             }
           } else {
             window.getComputedStyle(main, false).backgroundSize === 'cover';
-            this._check(i);
+            that._check(i);
           }
           main.diff = -(actualHeight - main.offsetHeight) * opt.speed;
           main.diff = main.diff - (main.offsetHeight * opt.boost);
