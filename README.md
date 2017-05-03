@@ -31,7 +31,7 @@ myParaxify = paraxify('.paraxify');
 IMPORTANT: Parallax and touch devices usually don't get along. So I highly suggest you to use [modernizr's](http://modernizr.com/download/) touch events. For example:
 
 ```javascript
-if(!Modernizr.touch){
+if(!Modernizr.touchevents){
 	myParaxify = paraxify('.paraxify');
 }
 ```
